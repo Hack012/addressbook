@@ -13,7 +13,7 @@ CONTRACT addressbook: public contract {
            address_index forUpsert(get_self(), get_self().value);
            auto itr = forUpsert.find(user.value);
 
-           if(itr == forUpsert.end()){
+           if(itr == forUpsert.end()){ //table의 정보 생성
            forUpsert.emplace(user, [&](auto& row){
                row.user = user;
                row.first_name = first_name;
@@ -23,7 +23,7 @@ CONTRACT addressbook: public contract {
            
            }
            else {
-               forUpsert.modify(itr, user, [&]( auto& row){
+               forUpsert.modify(itr, user, [&]( auto& row){ // 정보가 있을경우(수정)
                    row.user = user;
                    row.first_name = first_name;
                    row.last_name = last_name;
